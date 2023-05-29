@@ -1,0 +1,7 @@
+{
+  "name": "ionic-text-reader-01",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
