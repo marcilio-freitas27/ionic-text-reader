@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar  class="ion-text-center" color="secondary">
     <ion-title>
-      Blank
+      Text Reader
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,8 +13,51 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="container" class="margin ion-text-center">
+    <ion-textarea #textarea
+      [autoGrow]="true"
+      label="O que quer ouvir?"
+      labelPlacement="floating"
+      fill="outline"
+    ></ion-textarea>
+      <ion-item>
+        <ion-fab-button (click)="speak(textarea)">
+          <ion-icon name="play"></ion-icon>
+        </ion-fab-button>
+        
+        <ion-fab-button (click)="stop()" color="danger">
+          <ion-icon name="stop" ></ion-icon>
+        </ion-fab-button>
+
+        <ion-fab-button (click)="clear(textarea)" color="warning">
+          <ion-icon name="trash"></ion-icon>
+        </ion-fab-button>
+      </ion-item>
+      <ion-item>
+        <label>Taxa</label>
+        <ion-range
+          min="0.0" max="4.0"
+          pin="true"
+          color="primary"
+          (ionChange)="taxaChange($event)">
+        </ion-range>
+      </ion-item>
+      <ion-item>
+        <label>Tom</label>
+        <ion-range
+          min="0.0" max="2.0"
+          pin="true"
+          color="success"
+          (ionChange)="tomChange($event)">
+        </ion-range>
+      </ion-item>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-header>
+    <ion-toolbar  class="ion-text-center" color="secondary"> 
+      <ion-title>Footer</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-footer>
