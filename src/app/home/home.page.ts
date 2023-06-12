@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { IonTextarea, IonicModule } from '@ionic/angular';
-import { TextToSpeech } from '@capacitor-community/text-to-speech';
 import { RangeValue } from '@ionic/core';
-import { RangeCustomEvent } from '@ionic/angular';
+import { SpeechService } from '../service/speech.service';
 
 @Component({
   selector: 'app-home',
@@ -15,32 +14,40 @@ export class HomePage {
 
   taxa!: RangeValue;
   tom!: RangeValue;
-  constructor() {}
+  constructor(private speechService: SpeechService) {
 
-  public speak = async (text: IonTextarea) => {
-    await TextToSpeech.speak({
-      text: JSON.stringify(text.value),
-      lang: 'pt-BR',
-      rate: +(this.taxa),
-      pitch: +(this.tom),
-      volume: 1.0,
-      category: 'ambient',
-    });
+  }
+
+  ngOnInit(){
+
+  }
+
+  speak(taxa: RangeValue, tom: RangeValue, text: IonTextarea){
+    this.speechService.speak(taxa, tom, text);
   };
 
-  public stop = async () => {
-    await TextToSpeech.stop();
+  stop(){
+    this.speechService.stop();
   };
 
-  public taxaChange(event: Event){
-    this.taxa = (event as RangeCustomEvent).detail.value;
+  taxaChange(taxa: RangeValue, event: Event){
+    this.speechService.taxaChange(taxa, event);
   }
 
-  public tomChange(event: Event){
-    this.tom = (event as RangeCustomEvent).detail.value;
+  tomChange(tom: RangeValue, event: Event){
+    this.speechService.tomChange(tom, event);
   }
 
-  public clear = (text: IonTextarea) => {
-    text.value = "";
+  clear(text: IonTextarea){
+    this.speechService.clear(text);
   }
+
+  speakStart(text: IonTextarea){
+    this.speechService.speakStart(text);
+  }
+
+  speakAdd(){
+    this.speechService.speakAdd();
+  }
+
 }
